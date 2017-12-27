@@ -15,10 +15,10 @@ from foliant.preprocessors.base import BasePreprocessor
 class Preprocessor(BasePreprocessor):
     defaults = {
         'cache_dir': Path('.diagramscache'),
-        'blockdiag_binary_path': 'blockdiag',
-        'seqdiag_binary_path': 'seqdiag',
-        'actdiag_binary_path': 'actdiag',
-        'nwdiag_binary_path': 'nwdiag'
+        'blockdiag_path': 'blockdiag',
+        'seqdiag_path': 'seqdiag',
+        'actdiag_path': 'actdiag',
+        'nwdiag_path': 'nwdiag'
     }
     tags = 'blockdiag', 'seqdiag', 'actdiag', 'nwdiag'
 
@@ -29,7 +29,7 @@ class Preprocessor(BasePreprocessor):
             diagram_src_path: Path
         ) -> str:
         '''Generate the image generation command. Options from the config definition are passed
-        as command options (``cache_dir`` and ``*_binary_path`` options are omitted).
+        as command options (``cache_dir`` and ``*_path`` options are omitted).
 
         :param kind: Diagram kind: blockdiag, seqdiag, actdiag, or nwdiag
         :param options: Options extracted from the diagram definition
@@ -38,7 +38,7 @@ class Preprocessor(BasePreprocessor):
         :returns: Complete image generation command
         '''
 
-        components = [self.options[f'{kind}_binary_path']]
+        components = [self.options[f'{kind}_path']]
 
         params = self.options.get('params', {})
 

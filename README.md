@@ -25,10 +25,10 @@ The preprocessor has a number of options:
 preprocessors:
   - blockdiag:
       cache_dir: !path .diagramscache
-      blockdiag_binary_path: blockdiag
-      seqdiag_binary_path: seqdiag
-      actdiag_binary_path: actdiag
-      nwdiag_binary_path: nwdiag
+      blockdiag_path: blockdiag
+      seqdiag_path: seqdiag
+      actdiag_path: actdiag
+      nwdiag_path: nwdiag
       params:
         ...
 ```
@@ -40,7 +40,7 @@ preprocessors:
     >
     >   To save time during build, only new and modified diagrams are rendered. The generated images are cached and reused in future builds.
 
-`*_binary_path`
+`*_path`
 :   Paths to the `blockdiag`, `seqdiag`, `actdiag`, and `nwdiag` binaries. By default, it is assumed that you have these commands in `PATH`, but if they're installed in a custom place, you can define it here.
 
 `params`
