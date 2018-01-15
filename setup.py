@@ -19,7 +19,7 @@ setup(
     version='1.0.0',
     author='Konstantin Molchanov',
     author_email='moigagoo@live.com',
-    url='https://github.com/foliant-docs/foliantcontrib',
+    url='https://github.com/foliant-docs/foliantcontrib.blockdiag',
     packages=['foliant.preprocessors'],
     license='MIT',
     platforms='any',
