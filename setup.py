@@ -25,7 +25,7 @@ setup(
     platforms='any',
     install_requires=[
         'foliant>=1.0.0',
-        'blockdiag',
+        'blockdiag[pdf]',
         'seqdiag',
         'actdiag',
         'nwdiag'
