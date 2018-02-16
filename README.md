@@ -49,8 +49,8 @@ preprocessors:
         preprocessors:
           - blockdiag:
               params:
-              antialias: true
-              font: !path Anonymous_pro.ttf
+                antialias: true
+                font: !path Anonymous_pro.ttf
 
     To see the full list of params, run `blockdiag -h`.
 

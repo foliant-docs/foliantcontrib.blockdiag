@@ -16,7 +16,7 @@ setup(
     name='foliantcontrib.blockdiag',
     description=SHORT_DESCRIPTION,
     long_description=LONG_DESCRIPTION,
-    version='1.0.0',
+    version='1.0.1',
     author='Konstantin Molchanov',
     author_email='moigagoo@live.com',
     url='https://github.com/foliant-docs/foliantcontrib.blockdiag',
@@ -25,7 +25,7 @@ setup(
     platforms='any',
     install_requires=[
         'foliant>=1.0.0',
-        'blockdiag',
+        'blockdiag[pdf]',
         'seqdiag',
         'actdiag',
         'nwdiag'
