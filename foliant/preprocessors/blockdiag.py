@@ -141,7 +141,7 @@ class Preprocessor(BasePreprocessor):
 
         self.logger = self.logger.getChild('blockdiag')
 
-        self.logger.debug(f'Backend inited: {self.__dict__}')
+        self.logger.debug(f'Preprocessor inited: {self.__dict__}')
 
     def apply(self):
         self.logger.info('Applying preprocessor.')
