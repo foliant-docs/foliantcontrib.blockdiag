@@ -73,12 +73,14 @@ class Preprocessor(BasePreprocessor):
         :returns: Image ref
         '''
 
+        self.logger.debug(f'Processing diagram: {kind}, {options}, {body}')
+
         body_hash = md5(f'{body}'.encode())
         body_hash.update(str(self.options).encode())
 
         diagram_src_path = self._cache_path / kind / f'{body_hash.hexdigest()}.diag'
 
-        params = self.options.get("params", {})
+        params = self.options.get('params', {})
 
         diagram_format = {**options, **params}.get('format', 'png')
 
@@ -87,6 +89,8 @@ class Preprocessor(BasePreprocessor):
         img_ref = f'![{options.get("caption", "")}]({diagram_path.absolute().as_posix()})'
 
         if diagram_path.exists():
+            self.logger.debug(f'Diagram found in cache: {diagram_path}.')
+            self.logger.debug(f'Replacing diagram definition with {img_ref}.')
             return img_ref
 
         diagram_src_path.parent.mkdir(parents=True, exist_ok=True)
@@ -94,14 +98,20 @@ class Preprocessor(BasePreprocessor):
         with open(diagram_src_path, 'w', encoding='utf8') as diagram_src_file:
             diagram_src_file.write(body)
 
+        self.logger.debug(f'Saved diagram source to {diagram_src_path}.')
+
         try:
             command = self._get_command(kind, options, diagram_src_path)
             run(command, shell=True, check=True, stdout=PIPE, stderr=STDOUT)
+
+            self.logger.debug(f'Saved diagram to {diagram_path}.')
 
         except CalledProcessError as exception:
             raise RuntimeError(
                 f'Processing of diagram {diagram_src_path} failed: {exception.output.decode()}'
             )
+
+        self.logger.debug(f'Replacing diagram definition with {img_ref}.')
 
         return img_ref
 
@@ -129,9 +139,17 @@ class Preprocessor(BasePreprocessor):
 
         self._cache_path = self.project_path / self.options['cache_dir']
 
+        self.logger = self.logger.getChild('blockdiag')
+
+        self.logger.debug(f'Preprocessor inited: {self.__dict__}')
+
     def apply(self):
+        self.logger.info('Applying preprocessor.')
+
         for markdown_file_path in self.working_dir.rglob('*.md'):
             with open(markdown_file_path, encoding='utf8') as markdown_file:
                 content = markdown_file.read()
             with open(markdown_file_path, 'w', encoding='utf8') as markdown_file:
                 markdown_file.write(self.process_diagrams(content))
+
+        self.logger.info('Preprocessor applied.')
