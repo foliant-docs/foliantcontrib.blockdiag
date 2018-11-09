@@ -102,14 +102,19 @@ class Preprocessor(BasePreprocessor):
 
         try:
             command = self._get_command(kind, options, diagram_src_path)
+
+            self.logger.debug(f'Saving the diagram to {diagram_path}.')
+
             run(command, shell=True, check=True, stdout=PIPE, stderr=STDOUT)
 
-            self.logger.debug(f'Saved diagram to {diagram_path}.')
-
         except CalledProcessError as exception:
-            raise RuntimeError(
-                f'Processing of diagram {diagram_src_path} failed: {exception.output.decode()}'
-            )
+            self.logger.error(str(exception))
+
+            if exception.output.decode().startswith('ERROR: '):
+                self.logger.error(f'Processing of diagram {diagram_src_path} failed: {exception.output.decode()}')
+
+            else:
+                raise RuntimeError(f'Failed: {exception.output.decode()}')
 
         self.logger.debug(f'Replacing diagram definition with {img_ref}.')
 
