@@ -10,6 +10,7 @@ from typing import Dict
 OptionValue = int or float or bool or str
 
 from foliant.preprocessors.base import BasePreprocessor
+from foliant.utils import output
 
 
 class Preprocessor(BasePreprocessor):
@@ -111,7 +112,11 @@ class Preprocessor(BasePreprocessor):
             self.logger.error(str(exception))
 
             if exception.output.decode().startswith('ERROR: '):
-                self.logger.error(f'Processing of diagram {diagram_src_path} failed: {exception.output.decode()}')
+                error_message = f'Processing of diagram {diagram_src_path} failed: {exception.output.decode()}'
+
+                output(error_message, self.quiet)
+
+                self.logger.error(error_message)
 
             else:
                 raise RuntimeError(f'Failed: {exception.output.decode()}')
