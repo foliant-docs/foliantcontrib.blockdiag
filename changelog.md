@@ -1,6 +1,7 @@
-# 1.0.4 (under development)
+# 1.0.4
 
--    Do not rewrite source Markdown file if an error occurs.
+-   Do not rewrite source Markdown file if an error occurs.
+-   Use output() method and Foliant 1.0.8.
 
 # 1.0.3
 
