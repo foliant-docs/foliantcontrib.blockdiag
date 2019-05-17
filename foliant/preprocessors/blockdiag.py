@@ -43,7 +43,7 @@ class Preprocessor(BasePreprocessor):
 
         params = self.options.get('params', {})
 
-        for option_name, option_value in {**options, **params}.items():
+        for option_name, option_value in {**params, **options}.items():
             if option_name == 'caption':
                 continue
 
@@ -83,7 +83,7 @@ class Preprocessor(BasePreprocessor):
 
         params = self.options.get('params', {})
 
-        diagram_format = {**options, **params}.get('format', 'png')
+        diagram_format = {**params, **options}.get('format', 'png')
 
         diagram_path = diagram_src_path.with_suffix(f'.{diagram_format}')
 
@@ -104,7 +104,7 @@ class Preprocessor(BasePreprocessor):
         try:
             command = self._get_command(kind, options, diagram_src_path)
 
-            self.logger.debug(f'Saving the diagram to {diagram_path}.')
+            self.logger.debug(f'Running the command: {command}')
 
             run(command, shell=True, check=True, stdout=PIPE, stderr=STDOUT)
 
