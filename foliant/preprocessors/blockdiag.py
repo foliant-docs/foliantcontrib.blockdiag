@@ -19,9 +19,10 @@ class Preprocessor(BasePreprocessor):
         'blockdiag_path': 'blockdiag',
         'seqdiag_path': 'seqdiag',
         'actdiag_path': 'actdiag',
-        'nwdiag_path': 'nwdiag'
+        'nwdiag_path': 'nwdiag',
+        'rackdiag_path': 'rackdiag'
     }
-    tags = 'blockdiag', 'seqdiag', 'actdiag', 'nwdiag'
+    tags = 'blockdiag', 'seqdiag', 'actdiag', 'nwdiag', 'rackdiag'
 
     def _get_command(
             self,
@@ -32,7 +33,7 @@ class Preprocessor(BasePreprocessor):
         '''Generate the image generation command. Options from the config definition are passed
         as command options (``cache_dir`` and ``*_path`` options are omitted).
 
-        :param kind: Diagram kind: blockdiag, seqdiag, actdiag, or nwdiag
+        :param kind: Diagram kind: blockdiag, seqdiag, actdiag, nwdiag or rackdiag
         :param options: Options extracted from the diagram definition
         :param diagram_src_path: Path to the diagram source file
 
@@ -67,7 +68,7 @@ class Preprocessor(BasePreprocessor):
         If the image for this diagram has already been generated, the existing version
         is used.
 
-        :param kind: Diagram kind: blockdiag, seqdiag, actdiag, or nwdiag
+        :param kind: Diagram kind: blockdiag, seqdiag, actdiag, nwdiag, rackdiag
         :param options: Options extracted from the diagram definition
         :param body: Diagram body
 
