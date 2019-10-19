@@ -1,6 +1,6 @@
 # Blockdiag Preprocessor for Foliant
 
-[Blockdiag](http://blockdiag.com/) is a tool to generate diagrams from plain text. This preprocessor finds diagram definitions in the source and converts them into images on the fly during project build. It supports all Blockdiag flavors: blockdiag, seqdiag, actdiag, and nwdiag.
+[Blockdiag](http://blockdiag.com/) is a tool to generate diagrams from plain text. This preprocessor finds diagram definitions in the source and converts them into images on the fly during project build. It supports all Blockdiag flavors: blockdiag, seqdiag, actdiag, nwdiag and rackdiag.
 
 
 ## Installation
@@ -29,6 +29,7 @@ preprocessors:
       seqdiag_path: seqdiag
       actdiag_path: actdiag
       nwdiag_path: nwdiag
+      rackdiag_path: rackdiag
       params:
         ...
 ```
@@ -41,7 +42,7 @@ preprocessors:
     >   To save time during build, only new and modified diagrams are rendered. The generated images are cached and reused in future builds.
 
 `*_path`
-:   Paths to the `blockdiag`, `seqdiag`, `actdiag`, and `nwdiag` binaries. By default, it is assumed that you have these commands in `PATH`, but if they're installed in a custom place, you can define it here.
+:   Paths to the `blockdiag`, `seqdiag`, `actdiag`, `nwdiag` and `rackdiag` binaries. By default, it is assumed that you have these commands in `PATH`, but if they're installed in a custom place, you can define it here.
 
 `params`
 :   Params passed to the image generation commands (`blockdiag`, `seqdiag`, etc.). Params should be defined by their long names, with dashes replaced with underscores (e.g. `--no-transparency` becomes `no_transparency`); also, `-T` param is called `format` for readability:
@@ -57,7 +58,7 @@ preprocessors:
 
 ## Usage
 
-To insert a diagram definition in your Markdown source, enclose it between `<<blockdiag>...</blockdiag>`, `<<seqdiag>...</seqdiag>`, `<actdiag>...</actdiag>`, or `<nwdiag>...</nwdiag>` tags (indentation inside tags is optional):
+To insert a diagram definition in your Markdown source, enclose it between `<<blockdiag>...</blockdiag>`, `<<seqdiag>...</seqdiag>`, `<actdiag>...</actdiag>`, `<nwdiag>...</nwdiag>`, or `<rackdiag>...</rackdiag>` tags (indentation inside tags is optional):
 
 ```markdown
 Here's a block diagram:
