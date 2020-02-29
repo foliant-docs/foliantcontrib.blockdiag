@@ -1,6 +1,6 @@
 # Blockdiag Preprocessor for Foliant
 
-[Blockdiag](http://blockdiag.com/) is a tool to generate diagrams from plain text. This preprocessor finds diagram definitions in the source and converts them into images on the fly during project build. It supports all Blockdiag flavors: blockdiag, seqdiag, actdiag, and nwdiag.
+[Blockdiag](http://blockdiag.com/) is a tool to generate diagrams from plain text. This preprocessor finds diagram definitions in the source and converts them into images on the fly during project build. It supports all Blockdiag flavors: actdiag, blockdiag, nwdiag, packetdiag, rackdiag, and seqdiag.
 
 
 ## Installation
@@ -25,10 +25,12 @@ The preprocessor has a number of options:
 preprocessors:
   - blockdiag:
       cache_dir: !path .diagramscache
-      blockdiag_path: blockdiag
-      seqdiag_path: seqdiag
       actdiag_path: actdiag
+      blockdiag_path: blockdiag
       nwdiag_path: nwdiag
+      packetdiag_path: packetdiag
+      rackdiag_path: rackdiag
+      seqdiag_path: seqdiag
       params:
         ...
 ```
@@ -41,7 +43,7 @@ preprocessors:
     >   To save time during build, only new and modified diagrams are rendered. The generated images are cached and reused in future builds.
 
 `*_path`
-:   Paths to the `blockdiag`, `seqdiag`, `actdiag`, and `nwdiag` binaries. By default, it is assumed that you have these commands in `PATH`, but if they're installed in a custom place, you can define it here.
+:   Paths to the `actdiag`, `blockdiag`, `nwdiag`, `packetdiag`, `rackdiag`, or `seqdiag` binaries. By default, it is assumed that you have these commands in `PATH`, but if they're installed in a custom place, you can define it here.
 
 `params`
 :   Params passed to the image generation commands (`blockdiag`, `seqdiag`, etc.). Params should be defined by their long names, with dashes replaced with underscores (e.g. `--no-transparency` becomes `no_transparency`); also, `-T` param is called `format` for readability:
@@ -57,12 +59,12 @@ preprocessors:
 
 ## Usage
 
-To insert a diagram definition in your Markdown source, enclose it between `<<blockdiag>...</blockdiag>`, `<<seqdiag>...</seqdiag>`, `<actdiag>...</actdiag>`, or `<nwdiag>...</nwdiag>` tags (indentation inside tags is optional):
+To insert a diagram definition in your Markdown source, enclose it between `<actdiag>...</actdiag>`, `<blockdiag>...</blockdiag>`, `<nwdiag>...</nwdiag>`, `<packetdiag>...</packetdiag>`, `<rackdiag>...</rackdiag>`, or `<seqdiag>...</seqdiag>` tags (indentation inside tags is optional):
 
 ```markdown
 Here's a block diagram:
 
-<<blockdiag>
+<blockdiag>
   blockdiag {
     A -> B -> C -> D;
     A -> E -> F -> G;
@@ -71,7 +73,7 @@ Here's a block diagram:
 
 Here's a sequence diagram:
 
-<<seqdiag>
+<seqdiag>
   seqdiag {
     browser  -> webserver [label = "GET /index.html"];
     browser <-- webserver;
@@ -88,7 +90,7 @@ To set a caption, use `caption` option:
 ```markdown
 Diagram with a caption:
 
-<<blockdiag caption="Sample diagram from the official site">
+<blockdiag caption="Sample diagram from the official site">
   blockdiag {
     A -> B -> C -> D;
     A -> E -> F -> G;
@@ -101,7 +103,7 @@ You can override `params` values from the preprocessor config for each diagram:
 ```markdown
 By default, diagrams are in png. But this diagram is in svg:
 
-<<blockdiag caption="High-quality diagram" format="svg">
+<blockdiag caption="High-quality diagram" format="svg">
   blockdiag {
     A -> B -> C -> D;
     A -> E -> F -> G;

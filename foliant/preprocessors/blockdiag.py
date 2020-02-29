@@ -1,6 +1,6 @@
-'''`Blockdiag <http://blockdiag.com/>`__ preprocessor for Foliant documenation authoring tool.
+'''`Blockdiag <http://blockdiag.com/>`__ preprocessor for Foliant documentation authoring tool.
 
-Supports blockdiag, seqdiag, actdiag, and nwdiag.
+Supports actdiag, blockdiag, nwdiag, packetdiag, rackdiag, and seqdiag
 '''
 
 from pathlib import Path
@@ -16,12 +16,21 @@ from foliant.utils import output
 class Preprocessor(BasePreprocessor):
     defaults = {
         'cache_dir': Path('.diagramscache'),
-        'blockdiag_path': 'blockdiag',
-        'seqdiag_path': 'seqdiag',
         'actdiag_path': 'actdiag',
-        'nwdiag_path': 'nwdiag'
+        'blockdiag_path': 'blockdiag',
+        'nwdiag_path': 'nwdiag',
+        'packetdiag_path': 'packetdiag',
+        'rackdiag_path': 'rackdiag',
+        'seqdiag_path': 'seqdiag',
     }
-    tags = 'blockdiag', 'seqdiag', 'actdiag', 'nwdiag'
+    tags = (
+        'actdiag',
+        'blockdiag',
+        'nwdiag',
+        'packetdiag',
+        'rackdiag',
+        'seqdiag',
+    )
 
     def _get_command(
             self,
@@ -32,7 +41,7 @@ class Preprocessor(BasePreprocessor):
         '''Generate the image generation command. Options from the config definition are passed
         as command options (``cache_dir`` and ``*_path`` options are omitted).
 
-        :param kind: Diagram kind: blockdiag, seqdiag, actdiag, or nwdiag
+        :param kind: Diagram kind: actdiag, blockdiag, nwdiag, packetdiag, rackdiag, or seqdiag
         :param options: Options extracted from the diagram definition
         :param diagram_src_path: Path to the diagram source file
 
@@ -67,7 +76,7 @@ class Preprocessor(BasePreprocessor):
         If the image for this diagram has already been generated, the existing version
         is used.
 
-        :param kind: Diagram kind: blockdiag, seqdiag, actdiag, or nwdiag
+        :param kind: Diagram kind: actdiag, blockdiag, nwdiag, packetdiag, rackdiag, or seqdiag
         :param options: Options extracted from the diagram definition
         :param body: Diagram body
 
