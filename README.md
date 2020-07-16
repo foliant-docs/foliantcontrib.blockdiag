@@ -1,3 +1,5 @@
+[![](https://img.shields.io/pypi/v/foliantcontrib.blockdiag.svg)](https://pypi.org/project/foliantcontrib.blockdiag/) [![](https://img.shields.io/github/v/tag/foliant-docs/foliantcontrib.blockdiag.svg?label=GitHub)](https://github.com/foliant-docs/foliantcontrib.blockdiag)
+
 # Blockdiag Preprocessor for Foliant
 
 [Blockdiag](http://blockdiag.com/) is a tool to generate diagrams from plain text. This preprocessor finds diagram definitions in the source and converts them into images on the fly during project build. It supports all Blockdiag flavors: blockdiag, seqdiag, actdiag, and nwdiag.
@@ -57,12 +59,12 @@ preprocessors:
 
 ## Usage
 
-To insert a diagram definition in your Markdown source, enclose it between `<<blockdiag>...</blockdiag>`, `<<seqdiag>...</seqdiag>`, `<actdiag>...</actdiag>`, or `<nwdiag>...</nwdiag>` tags (indentation inside tags is optional):
+To insert a diagram definition in your Markdown source, enclose it between `<blockdiag>...</blockdiag>`, `<seqdiag>...</seqdiag>`, `<actdiag>...</actdiag>`, or `<nwdiag>...</nwdiag>` tags (indentation inside tags is optional):
 
 ```markdown
 Here's a block diagram:
 
-<<blockdiag>
+<blockdiag>
   blockdiag {
     A -> B -> C -> D;
     A -> E -> F -> G;
@@ -71,7 +73,7 @@ Here's a block diagram:
 
 Here's a sequence diagram:
 
-<<seqdiag>
+<seqdiag>
   seqdiag {
     browser  -> webserver [label = "GET /index.html"];
     browser <-- webserver;
@@ -88,7 +90,7 @@ To set a caption, use `caption` option:
 ```markdown
 Diagram with a caption:
 
-<<blockdiag caption="Sample diagram from the official site">
+<blockdiag caption="Sample diagram from the official site">
   blockdiag {
     A -> B -> C -> D;
     A -> E -> F -> G;
@@ -101,7 +103,7 @@ You can override `params` values from the preprocessor config for each diagram:
 ```markdown
 By default, diagrams are in png. But this diagram is in svg:
 
-<<blockdiag caption="High-quality diagram" format="svg">
+<blockdiag caption="High-quality diagram" format="svg">
   blockdiag {
     A -> B -> C -> D;
     A -> E -> F -> G;
