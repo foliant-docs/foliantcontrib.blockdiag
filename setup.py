@@ -26,6 +26,7 @@ setup(
     platforms='any',
     install_requires=[
         'foliant>=1.0.8',
+        'Pillow==9.5.0',
         'blockdiag[pdf]',
         'seqdiag',
         'actdiag',
