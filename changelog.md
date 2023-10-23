@@ -1,3 +1,7 @@
+# 1.0.6
+
+-   Pin down Pillow version.
+
 # 1.0.5
 
 -   Attributes of pseudo-XML tags have higher priority than config file options.
